@@ -2,5 +2,5 @@
 D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(22,5): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
 D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(85,38): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
 D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(86,38): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(119,9): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(120,9): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
   project_8_group.vcxproj -> D:\visual studio\repos\project_8_group\x64\Debug\project_8_group.exe

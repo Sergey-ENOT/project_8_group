@@ -20,7 +20,7 @@ vector<char> getNumber(vector<char> &number) {
         std::cin.getline(number, 255);
     }*/
     for (int i = Number.length() - 1; i >= 0; i--) {
-        number.push_back(int(Number[i]));
+        number.push_back(Number[i]);
     }
     /*for (int i = 0; i < number.size(); i++) {
         cout << number[i] << " ";
@@ -99,20 +99,21 @@ void calc(vector<char>& num1, char op, vector<char>& num2, vector<char>& result)
         for (int i = 0; i < num1.size(); i++) {
             number1 = translate_to_int(num1[i]);
             number2 = translate_to_int(num2[i]);
-            if (number1 + number2 + iterator < 10) {
+            if (number1 + number2 + iterator < 10) {              //если сумма меньше 10, то просто пуш в result числа
                 int summ = number1 + number2 + iterator;
                 iterator = 0;
                 result.push_back(summ);
-            } else if (number1 + number2 + iterator >= 10) {
-                if (i == num1.size() - 1) {
+            } else if (number1 + number2 + iterator >= 10) {      //если сумма >= 10, то пуш отстатка от вычитания 10
+                if (i == num1.size() - 1) {                       
+                    int summ = number1 + number2 + iterator;
+                    iterator = 1;                                 // и запись увеличения следующего разряда в iterator
+                    result.push_back(summ - 10);
+                    result.push_back(iterator);
+                } else {
                     int summ = number1 + number2 + iterator;
                     iterator = 1;
                     result.push_back(summ - 10);
-                    result.push_back(iterator);
                 }
-                int summ = number1 + number2 + iterator;
-                iterator = 1;
-                result.push_back(summ - 10);
             }
         }
 
