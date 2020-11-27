@@ -22,9 +22,6 @@ vector<char> getNumber(vector<char> &number) {
     for (int i = Number.length() - 1; i >= 0; i--) {
         number.push_back(Number[i]);
     }
-    /*for (int i = 0; i < number.size(); i++) {
-        cout << number[i] << " ";
-    }*/
     cout << "\n";
     return number;
 }
@@ -78,6 +75,42 @@ int translate_to_int(char a) {
 }
 
 //функция вывода результатного вектора
+void show_result(vector<char>& number) {
+    for (int i = number.size() - 1; i >= 0; i--) {   //в обратном порядке
+        switch (number[i]) {
+        case 0:
+            cout << 0;
+            break;
+        case 1:
+            cout << 1;
+            break;
+        case 2:
+            cout << 2;
+            break;
+        case 3:
+            cout << 3;
+            break;
+        case 4:
+            cout << 4;
+            break;
+        case 5:
+            cout << 5;
+            break;
+        case 6:
+            cout << 6;
+            break;
+        case 7:
+            cout << 7;
+            break;
+        case 8:
+            cout << 8;
+            break;
+        case 9:
+            cout << 9;
+            break;
+        }
+    }
+}
 
 void calc(vector<char>& num1, char op, vector<char>& num2, vector<char>& result) {
     int number1, number2, iterator;
@@ -93,7 +126,7 @@ void calc(vector<char>& num1, char op, vector<char>& num2, vector<char>& result)
             for (int i = 0; i < length_num2 - length_num1; i++) { //нулей до выравнивания                   
                 num1.push_back(0);
             }
-        } 
+        }
 
         iterator = 0;
         for (int i = 0; i < num1.size(); i++) {
@@ -103,137 +136,92 @@ void calc(vector<char>& num1, char op, vector<char>& num2, vector<char>& result)
                 int summ = number1 + number2 + iterator;
                 iterator = 0;
                 result.push_back(summ);
-            } else if (number1 + number2 + iterator >= 10) {      //если сумма >= 10, то пуш отстатка от вычитания 10
-                if (i == num1.size() - 1) {                       
+            }
+            else if (number1 + number2 + iterator >= 10) {      //если сумма >= 10, то пуш отстатка от вычитания 10
+                if (i == num1.size() - 1) {
                     int summ = number1 + number2 + iterator;
                     iterator = 1;                                 // и запись увеличения следующего разряда в iterator
                     result.push_back(summ - 10);
                     result.push_back(iterator);
-                } else {
+                }
+                else {
                     int summ = number1 + number2 + iterator;
                     iterator = 1;
                     result.push_back(summ - 10);
                 }
             }
         }
+    } 
+    if (op == '-') {
+        int length_num1 = num1.size();
+        int length_num2 = num2.size();
+        int flag = 0;
 
-        for (int i = result.size() - 1; i >= 0; i--) {   //в обратном порядке
-            switch (result[i]) {
-            case 0:
-                cout << 0;
-                break;
-            case 1:
-                cout << 1;
-                break;
-            case 2:
-                cout << 2;
-                break;
-            case 3:
-                cout << 3;
-                break;
-            case 4:
-                cout << 4;
-                break;
-            case 5:
-                cout << 5;
-                break;
-            case 6:
-                cout << 6;
-                break;
-            case 7:
-                cout << 7;
-                break;
-            case 8:
-                cout << 8;
-                break;
-            case 9:
-                cout << 9;
-                break;
+        if (length_num1 > length_num2) {                            //если первое больше второго, то вставка во второй
+            for (int i = 0; i < length_num1 - length_num2; i++) {   //вектор нулей до выравнивания
+                num2.push_back(0);
+                flag = 1;
+            }
+        }
+        else if (length_num1 < length_num2) {                     //если второй больше, то вставка в первый вектор
+            for (int i = 0; i < length_num2 - length_num1; i++) { //нулей до выравнивания                   
+                num1.push_back(0);
+                flag = 2;
+            }
+        }
+        else {
+            for (int i = num1.size() - 1; i >= 0; i--) {         //если равны по количеству символов
+                number1 = translate_to_int(num1[i]);
+                number2 = translate_to_int(num2[i]);
+                if (number1 > number2) {                         //у первого числа быстрее встретилось большее - по алгоритму ->
+                    flag = 1;                                    // -> для num1 > num2
+                    break;
+                }
+                else if (number1 < number2) {                    //иначе - по алгоритму для num1 < num2
+                    //num1<num2
+                    flag = 2;
+                    break;
+                }
             }
         }
 
-        //когда первое число меньше второго получение цифр 1 9 (пример 80 + 1980)
-        //if (i < 0 && j >= 0) {
-        //    number1 = 0;
-        //    number2 = translate_to_int(num2[j]);
+        int reducer = 0;
+        int difference;
+        if (flag == 1) {
+            for (int i = 0; i < length_num1; i++) {
+                number1 = translate_to_int(num1[i]);
+                number2 = translate_to_int(num2[i]);
+                if (number1 - number2 - reducer >= 0) {            //при положительной или 0 разности - просто запушить разность
+                    difference = number1 - number2 - reducer;
+                    reducer = 0;
+                    result.push_back(difference);
+                }
+                else if (number1 - number2 - reducer < 0) {         //при отрицательной разности запушить разницу с прибавлением 10
+                    difference = number1 + 10 - number2 - reducer;  //и 
+                    reducer = 1;                                    //занести в переменную число для уменьшения следующего разряда
+                    result.push_back(difference);
+                }
+            }
+        } 
+        if (flag == 2) {                                            //как в алгоритме flag = 1, но противоположные векторы
+            for (int i = 0; i < length_num2; i++) {
+                number1 = translate_to_int(num1[i]);
+                number2 = translate_to_int(num2[i]);
+                if (number2 - number1 - reducer >= 0) {
+                    difference = number2 - number1 - reducer;
+                    reducer = 0;
+                    result.push_back(difference);
+                }
+                else if (number2 - number1 - reducer < 0) {
+                    difference = number2 + 10 - number1 - reducer;
+                    reducer = 1;
+                    result.push_back(difference);
+                }
+            }
+        }
+        /*else if (length_num1 = length_num2) {
 
-        //    if (result[j + 1] == ' ') {
-        //        result[j + 1] = number2;
-        //    }
-        //    else {
-        //        if (result[j + 1] + number2 >= 10) {
-        //            result[j + 1] = (result[j + 1] + number2) % 10;
-        //            if (result[j] == ' ') {
-        //                result[j] = 1;
-        //            }
-        //            else {
-        //                result[j] += 1;
-        //            }
-        //        }
-        //        else {
-        //            result[j + 1] += number2;
-        //        }
-
-        //    }
-        //}
-        ////когда второе число меньше первого получение цифр 1 9 (пример 1982 + 80)
-        //else if (j < 0 && i >= 0) {
-        //    number1 = translate_to_int(num1[i]);
-        //    number2 = 0;
-        //    if (result[i + 1] == ' ') {
-        //        result[i + 1] = number1;
-        //    }
-        //    else {
-        //        if (result[i + 1] + number1 >= 10) {
-        //            result[i + 1] = (result[i + 1] + number1) % 10;
-        //            if (result[i] == ' ') {
-        //                result[i] = 1;
-        //            }
-        //            else {
-        //                result[i] += 1;
-        //            }
-        //        }
-        //        else {
-        //            result[i + 1] += number1;
-        //        }
-
-        //    }
-        //}
-        ////еще не известно самое большое число
-        //else {
-        //    number1 = translate_to_int(num1[i]);
-        //    number2 = translate_to_int(num2[j]);
-        //    //iterator - служит для внесения результта в массив по правильным индексам начиная с эмента под индексом j или i + 1 (так как резульат суммы 2 чисел в худшем случае увеличиться на 1)
-        //    if (i > j) {
-        //        iterator = i;
-        //    }
-        //    else {
-        //        iterator = j;
-        //    }
-        //    if (number1 + number2 >= 10) {
-        //        if (result[iterator + 1] == ' ') {
-        //            result[iterator + 1] = (number1 + number2) % 10;
-        //        }
-        //        else {
-        //            result[iterator + 1] += (number1 + number2) % 10;
-        //        }
-        //        //перенос 1 влево, если там нет ничего то присвоить 1 если что-то уже лежит прибавить
-        //        if (result[iterator] == ' ') {
-        //            result[iterator] = 1;
-        //        }
-        //        else {
-        //            result[iterator] += 1;
-        //        }
-        //    }
-        //    else {
-        //        if (result[iterator + 1] == ' ') {
-        //            result[iterator + 1] = number1 + number2;
-        //        }
-        //        else {
-        //            result[iterator + 1] += number1 + number2;
-        //        }
-        //    }
-        //}
+        }*/
     }
 }
 
@@ -252,6 +240,7 @@ int main()
     getNumber(num1a);
     getNumber(num2a);
     calc(num1a, getOperand(), num2a, result);
+    show_result(result);
     return 0;
 }
 
