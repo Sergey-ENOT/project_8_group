@@ -4,23 +4,34 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <string>
 
 using namespace std;
 
 vector<char> getNumber(vector<char> &number) {
+    //todo добавить считывание минуса и плюса в начале числа.
     //todo реализовать возможность введения отрицательных чисел.
-    std::cout << "Введите число: ";
-    string Number;
-    cin >> Number;
-    /*std::cin.getline(Number, 255);
-    while (std::cin.fail()) {
-        std::cout << "Введите правильное число" << std::endl;
-        std::cin.clear();
-        std::cin.ignore(32767, '\n');
-        std::cin.getline(number, 255);
-    }*/
-    for (int i = Number.length() - 1; i >= 0; i--) {
-        number.push_back(Number[i]);
+    bool condition = true;
+    while (condition) {
+        std::cout << "Введите число: ";
+        string Number;
+        getline(cin, Number);
+        for (int i = Number.length() - 1; i >= 0; i--) {
+            //if (i == 0 && Number[i] = '-')
+            if (Number[i] == '0' || Number[i] == '1' || Number[i] == '2' || Number[i] == '3' ||
+                Number[i] == '4' || Number[i] == '5' || Number[i] == '6' || Number[i] == '7' ||
+                Number[i] == '8' || Number[i] == '9') {
+                number.push_back(Number[i]);
+                if (i == 0) {
+                    condition = false;
+                }
+            }
+            else {
+                cout << "Вы ввели неправильное число" << endl;               
+                number.clear();
+                break;
+            }
+        }
     }
     cout << "\n";
     return number;
@@ -76,38 +87,45 @@ int translate_to_int(char a) {
 
 //функция вывода результатного вектора
 void show_result(vector<char>& number) {
-    for (int i = number.size() - 1; i >= 0; i--) {   //в обратном порядке
-        switch (number[i]) {
-        case 0:
-            cout << 0;
-            break;
-        case 1:
-            cout << 1;
-            break;
-        case 2:
-            cout << 2;
-            break;
-        case 3:
-            cout << 3;
-            break;
-        case 4:
-            cout << 4;
-            break;
-        case 5:
-            cout << 5;
-            break;
-        case 6:
-            cout << 6;
-            break;
-        case 7:
-            cout << 7;
-            break;
-        case 8:
-            cout << 8;
-            break;
-        case 9:
-            cout << 9;
-            break;
+    int condition_of_null = 0;
+    for (int i = number.size() - 1; i >= 0; i--) {   //в обратном порядке  
+        if (number[i] == 0 && condition_of_null == 0) {
+            cout << "";           
+        }
+        else {
+            switch (number[i]) {
+            case 0:
+                cout << 0;
+                break;
+            case 1:
+                cout << 1;
+                break;
+            case 2:
+                cout << 2;
+                break;
+            case 3:
+                cout << 3;
+                break;
+            case 4:
+                cout << 4;
+                break;
+            case 5:
+                cout << 5;
+                break;
+            case 6:
+                cout << 6;
+                break;
+            case 7:
+                cout << 7;
+                break;
+            case 8:
+                cout << 8;
+                break;
+            case 9:
+                cout << 9;
+                break;
+            }     
+            condition_of_null = 1;
         }
     }
 }
@@ -228,19 +246,19 @@ void calc(vector<char>& num1, char op, vector<char>& num2, vector<char>& result)
 int main()
 {
     setlocale(0, "");
-    vector<char> num1a;
-    vector<char> num2a;
-    vector<char> result;
-    /*while (true) {
+    while (true) {
+        vector<char> num1a;
+        vector<char> num2a;
+        vector<char> result;
         getNumber(num1a);
         getNumber(num2a);
         calc(num1a, getOperand(), num2a, result);
+        cout << "\nРезультат операции: ";
         show_result(result);
-    }*/
-    getNumber(num1a);
-    getNumber(num2a);
-    calc(num1a, getOperand(), num2a, result);
-    show_result(result);
+        cout << "\n";
+        cout << "\n";
+        cout << "\n";
+    }
     return 0;
 }
 
