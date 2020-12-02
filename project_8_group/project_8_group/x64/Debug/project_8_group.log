@@ -1,9 +1,11 @@
 ﻿  project_8_group.cpp
 D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(19,9): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(91,5): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(136,38): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(137,38): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(174,38): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(175,38): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(191,13): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(48,9): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(118,34): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(119,34): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(135,9): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(121,9): warning C4101: counter_equality: неиспользованная локальная переменная
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(280,5): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(290,5): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(114): warning C4715: translate_to_int: значение возвращается не при всех путях выполнения
   project_8_group.vcxproj -> D:\visual studio\repos\project_8_group\x64\Debug\project_8_group.exe
