@@ -16,6 +16,11 @@ vector<char> getNumber1(vector<char> &number) {
         std::cout << "Введите число: ";
         string Number;
         getline(cin, Number);
+        if (Number == "exit") {
+            number.push_back('e');
+            condition = false;
+            break;
+        }
         for (int i = Number.length() - 1; i >= 0; i--) {
             //if (i == 0 && Number[i] = '-')
             if (Number[i] == '0' || Number[i] == '1' || Number[i] == '2' || Number[i] == '3' ||
@@ -153,11 +158,39 @@ int comparing(vector<char>& num1, vector<char>& num2) {
     return flag;
 }
 
+int comparing_multiplication(vector<char> num1, vector<char> num2) {
+    int number1, number2;
+    int length_num1 = num1.size();
+    int length_num2 = num2.size();
+    int flag = 0;
+    int counter_null_num1 = 0;
+    int counter_null_num2 = 0;
+    for (int i = 0; i < num1.size(); i++) {
+        number1 = translate_to_int(num1[i]);
+        if (num1[i] == '0') {
+            counter_null_num1 += 1;
+        }
+    }
+    for (int i = 0; i < num2.size(); i++) {
+        number2 = translate_to_int(num2[i]);
+        if (num2[i] == '0') {
+            counter_null_num2 += 1;
+        }
+    }
+    if (counter_null_num1 == num1.size() || counter_null_num2 == num2.size()) {
+        flag = 1;
+    }
+    else {
+        flag = 2;
+    }
+    return flag;
+}
+
 
 void calc(vector<char>& num1, char op, vector<char>& num2, vector<char>& result) {
     int number1, number2, iterator;
-    int flag = comparing(num1, num2);
-    if (op == '+') {            
+    if (op == '+') {      
+        int flag = comparing(num1, num2);
         if (flag == 1 || flag == 2 || flag == 3) {
             iterator = 0;
             for (int i = 0; i < num1.size(); i++) {
@@ -187,6 +220,7 @@ void calc(vector<char>& num1, char op, vector<char>& num2, vector<char>& result)
     if (op == '-') {
         int reducer = 0;
         int difference;
+        int flag = comparing(num1, num2);
         if (flag == 1) {
             for (int i = 0; i < num1.size(); i++) {
                 number1 = translate_to_int(num1[i]);
@@ -226,24 +260,31 @@ void calc(vector<char>& num1, char op, vector<char>& num2, vector<char>& result)
         }
     }
     if (op == '*') {
-        int counter_num1 = 0;
-        int counter_num2 = 0;
+        int flag = comparing_multiplication(num1, num2);
+        if (flag == 1) {
+            result.push_back('n');
+        }
+        else if (flag == 2) {
+
+        }
+        /*int counter_null_num1 = 0;
+        int counter_null_num2 = 0;
         for (int i = 0; i < num1.size(); i++) {
             number1 = translate_to_int(num1[i]);
             number2 = translate_to_int(num2[i]);
             if (number1 == 0) {
-                counter_num1 += 1;
+                counter_null_num1 += 1;
             }
             if (number2 == 0) {
-                counter_num2 += 1;
+                counter_null_num2 += 1;
             }
         }
-        if (counter_num1 == num1.size() || counter_num2 == num2.size()) {
+        if (counter_null_num1 == num1.size() || counter_null_num2 == num2.size()) {
             result.push_back('n');
         }
         else {
 
-        }
+        }*/
         //for (int i = 0; i < 0; i++) {
         //    if (flag == 1 || flag == 2 || flag == 3) {
         //        iterator = 0;
@@ -346,6 +387,9 @@ int main()
         vector<char> num2a;
         vector<char> result;
         getNumber1(num1a);
+        if (num1a[0] == 'e') {
+            exit(0);
+        }
         getNumber2(num2a);
         calc(num1a, getOperand(), num2a, result);
         cout << "\nРезультат операции: ";
