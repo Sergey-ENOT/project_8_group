@@ -5,9 +5,9 @@ D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(123,3
 D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(124,34): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
 D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(140,9): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
 D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(126,9): warning C4101: counter_equality: неиспользованная локальная переменная
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(163,34): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(164,34): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(321,5): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(331,5): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(224,27): warning C4101: iterator: неиспользованная локальная переменная
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(268,27): warning C4101: iterator: неиспользованная локальная переменная
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(414,5): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(424,5): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
 D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(119): warning C4715: translate_to_int: значение возвращается не при всех путях выполнения
   project_8_group.vcxproj -> D:\visual studio\repos\project_8_group\x64\Debug\project_8_group.exe
