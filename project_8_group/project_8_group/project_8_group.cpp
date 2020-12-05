@@ -158,7 +158,7 @@ int comparing(vector<char>& num1, vector<char>& num2) {
     return flag;
 }
 
-int comparing_multiplication(vector<char> num1, vector<char> num2) {
+int comparing_multiplication(vector<char>& num1, vector<char>& num2) {
     int number1, number2;
     int flag = 0;
     int counter_null_num1 = 0;
@@ -182,10 +182,14 @@ int comparing_multiplication(vector<char> num1, vector<char> num2) {
         flag = 2;
     }
     else if (num1.size() < num2.size()) {
-        flag = 3;
+        vector<char> changer;
+        changer = num2;
+        num2 = num1;
+        num1 = changer;
+        flag = 2;
     }
     else if (num1.size() == num2.size()) {
-        flag = 4;
+        flag = 2;
     }
     return flag;
 }
@@ -193,7 +197,7 @@ int comparing_multiplication(vector<char> num1, vector<char> num2) {
 void addition(vector<char>& num1, vector<char>& num2, vector<char>& result) {
     int number1, number2, iterator;
     int flag = comparing(num1, num2);
-    if (flag == 1 || flag == 2 || flag == 3) {
+    if (flag != 0) {
         iterator = 0;
         for (int i = 0; i < num1.size(); i++) {
             number1 = translate_to_int(num1[i]);
@@ -263,6 +267,7 @@ void subtraction(vector<char>& num1, vector<char>& num2, vector<char>& result) {
     }
 }
 
+void show_result(vector<char>& number);
 
 void calc(vector<char>& num1, char op, vector<char>& num2, vector<char>& result) {
     int number1, number2, iterator;
@@ -278,132 +283,28 @@ void calc(vector<char>& num1, char op, vector<char>& num2, vector<char>& result)
             result.push_back('n');
         }
         else if (flag == 2) {
-            for (int i = 0; i < num1.size() + num2.size(); i++) {
-                result.push_back(0);
-            }
-            int increase = 0;                                //переменная для увеличения след.разряда
-            int digit = 0;                                   //переменная для записи произведения
+            int counter_null = 0;
             vector<char> pre_result;
-            for (int j = 0; j < num2.size(); j++) {              
-                if (j > 0) {
-                    for (int k = 0; k < j; k++) {
-                        pre_result.push_back(0);
+            vector<char> subtrahend = { 1 };
+            bool flagok = true;
+            do {
+                addition(num1, pre_result, result);
+                pre_result = result;
+                result.clear();
+                subtraction(num2, subtrahend, result);
+                num2 = result;
+                result.clear();
+                counter_null = 0;
+                for (int i = 0; i < num2.size(); i++) {
+                    if (num2[i] == 'n' || num2[i] == '0') {
+                        counter_null += 1;
                     }
                 }
-                number2 = translate_to_int(num2[j]);
-                for (int i = 0; i < num1.size(); i++) {
-                    number1 = translate_to_int(num1[i]);
-                    if (number1 * number2 + increase < 10) {
-                        digit = number1 * number2 + increase;
-                        increase = 0;
-                        pre_result.push_back(digit);
-                    }
-                    else if (number1 * number2 + increase >= 10) {
-                        increase = (number1 * number2 + increase) / 10;
-                        digit = (number1 * number2 + increase) % 10;
-                        pre_result.push_back(digit);
-                    }
+                if (counter_null == num2.size()) {
+                    result = pre_result;
+                    flagok = false;
                 }
-                cout << "Результат умножения: ";      
-                for (int t = 0; t < pre_result.size(); t++) {       //проверка умножения --> потом убрать
-                    switch (pre_result[t]) {
-                    case 0:
-                        cout << 0;
-                        break;
-                    case 1:
-                        cout << 1;
-                        break;
-                    case 2:
-                        cout << 2;
-                        break;
-                    case 3:
-                        cout << 3;
-                        break;
-                    case 4:
-                        cout << 4;
-                        break;
-                    case 5:
-                        cout << 5;
-                        break;
-                    case 6:
-                        cout << 6;
-                        break;
-                    case 7:
-                        cout << 7;
-                        break;
-                    case 8:
-                        cout << 8;
-                        break;
-                    case 9:
-                        cout << 9;
-                        break;
-                    case 'n':
-                        cout << 0;
-                    }
-                }
-                if (j == 0) {
-                    int number1, number2, iterator;
-                    int flag = comparing(pre_result, result);
-                    if (flag == 1 || flag == 2 || flag == 3) {
-                        iterator = 0;
-                        for (int i = 0; i < pre_result.size(); i++) {
-                            number1 = translate_to_int(pre_result[i]);
-                            number2 = translate_to_int(result[i]);
-                            if (number1 + number2 + iterator < 10) {
-                                int summ = number1 + number2 + iterator;
-                                iterator = 0;
-                                result[i] = summ;
-                            }
-                            else if (number1 + number2 + iterator >= 10) {
-                                if (i == pre_result.size() - 1) {
-                                    int summ = number1 + number2 + iterator;
-                                    iterator = 1;
-                                    result[i] = summ - 10;
-                                    result[i] = iterator;
-                                }
-                                else {
-                                    int summ = number1 + number2 + iterator;
-                                    iterator = 1;
-                                    result[i] = summ - 10;
-                                }
-                            }
-                        }
-                    }
-                }
-                else {
-                    int number1, number2, iterator;
-                    int flag = comparing(pre_result, result);
-                    if (flag == 1 || flag == 2 || flag == 3) {
-                        iterator = 0;
-                        for (int i = 0; i < pre_result.size(); i++) {
-                            number1 = translate_to_int(num1[i]);
-                            number2 = translate_to_int(num2[i]);
-                            if (number1 + number2 + iterator < 10) {
-                                int summ = number1 + number2 + iterator;
-                                iterator = 0;
-                                result[i] = summ;
-                            }
-                            else if (number1 + number2 + iterator >= 10) {
-                                if (i == pre_result.size() - 1) {
-                                    int summ = number1 + number2 + iterator;
-                                    iterator = 1;
-                                    result[i] = summ - 10;
-                                    result.push_back(iterator);
-                                }
-                                else {
-                                    int summ = number1 + number2 + iterator;
-                                    iterator = 1;
-                                    result[i] = summ - 10;
-
-                                }
-                            }
-                        }
-                    }
-
-
-                }
-                pre_result.clear();
-            }
+            } while (flagok);
         }
     }
 }
@@ -428,7 +329,7 @@ void show_result(vector<char>& number) {
         else if (number[i] == 0 && condition_of_null == 0) {
             if (i == 0) {
                 cout << 0;
-            }else {
+            } else {
             cout << "";
             }
         }
