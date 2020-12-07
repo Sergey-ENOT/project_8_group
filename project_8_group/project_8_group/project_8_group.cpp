@@ -194,6 +194,56 @@ int comparing_multiplication(vector<char>& num1, vector<char>& num2) {
     return flag;
 }
 
+int comparing_division(vector<char>& num1, vector<char>& num2) {
+    int number1, number2;
+    int flag = 0;
+    int counter_null_num1 = 0;
+    int counter_null_num2 = 0;
+    for (int i = 0; i < num1.size(); i++) {
+        number1 = translate_to_int(num1[i]);
+        if (num1[i] == '0') {
+            counter_null_num1 += 1;
+        }
+    }
+    for (int i = 0; i < num2.size(); i++) {
+        number2 = translate_to_int(num2[i]);
+        if (num2[i] == '0') {
+            counter_null_num2 += 1;
+        }
+    } if (num1.size() == counter_null_num1) {
+        flag = 1;
+    }
+    else if (num2.size() == counter_null_num2) {
+        flag = 2;
+    }
+    else if (num1.size() > num2.size()) {
+        flag = 3;
+    }
+    else if (num1.size() < num2.size()) {
+        flag = 4;
+    }
+    else {
+        for (int i = num1.size() - 1; i >= 0; i--) {         //если равны по количеству символов
+            number1 = translate_to_int(num1[i]);
+            number2 = translate_to_int(num2[i]);
+            if (number1 > number2) {                         //у первого числа быстрее встретилось большее - по алгоритму ->
+                flag = 3;                                    // -> для num1 > num2
+                break;
+            }
+            else if (number1 < number2) {                    //иначе - по алгоритму для num1 < num2
+                flag = 4;
+                break;
+            }
+            else if (number1 == number2) {
+                if (i == 0) {
+                    flag = 5;
+                }
+            }
+        }
+    }
+    return flag;
+}
+
 void addition(vector<char>& num1, vector<char>& num2, vector<char>& result) {
     int number1, number2, iterator;
     int flag = comparing(num1, num2);
@@ -278,8 +328,8 @@ void calc(vector<char>& num1, char op, vector<char>& num2, vector<char>& result)
         subtraction(num1, num2, result);
     }
     if (op == '*') {
-        int flag = comparing_multiplication(num1, num2);      
-        if (flag == 1) {
+        int flag = comparing_multiplication(num1, num2);     //обязательно переделать на умножение со смещением  
+        if (flag == 1) {                                     //т.к. 643 миллиона итераций это 22+ минуты ожидания(дальше я не стал ждать)
             result.push_back('n');
         }
         else if (flag == 2) {
@@ -305,6 +355,41 @@ void calc(vector<char>& num1, char op, vector<char>& num2, vector<char>& result)
                     flagok = false;
                 }
             } while (flagok);
+        }
+    }
+    if (op == '/') {
+        int flag = comparing_division(num1, num2);
+        if (flag == 1) {                  //когда делимое равно 0
+            result.push_back(0);
+            return;
+        }
+        else if (flag == 2) {             //когда делитель равен 0
+            result.push_back('e');        //'e' = error
+            return;
+        }
+        else if (flag == 3) {             //продолжение вычитания
+            //реализовать логику
+            vector<char> pre_result;
+            vector<char> subtrahend = { 1 };
+            vector<char> counter_iteration = num2;
+            bool flagok = true;
+            do {
+                subtraction(counter_iteration, subtrahend, result);     // блок уменьшения
+                counter_iteration = result;                             // оставшихся
+                result.clear();                                         // итераций
+                flag = comparing_division(num1, num2);       //отслеживание состояния векторов
+                subtraction(num1, num2, result);
+                
+            } while (flagok);
+            //вычитание в цикле while , пока уменьшаемое больше вычитаемого и увеличение вектора счётчика
+        }
+        else if (flag == 4) {
+            result.push_back(0);
+            return;
+        }
+        else if (flag == 5) {
+            result.push_back(1);
+            return;
         }
     }
 }
@@ -367,6 +452,9 @@ void show_result(vector<char>& number) {
                 break;
             case 'n':
                 cout << 0;
+                break;
+            case 'e':
+                cout << "На ноль делить нельзя";
             }
             condition_of_null = 1;
         }

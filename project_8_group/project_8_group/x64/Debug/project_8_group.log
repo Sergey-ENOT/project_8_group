@@ -5,11 +5,12 @@ D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(123,3
 D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(124,34): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
 D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(140,9): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
 D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(126,9): warning C4101: counter_equality: неиспользованная локальная переменная
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(228,27): warning C4101: iterator: неиспользованная локальная переменная
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(273,27): warning C4101: iterator: неиспользованная локальная переменная
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(273,9): warning C4101: number1: неиспользованная локальная переменная
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(273,18): warning C4101: number2: неиспользованная локальная переменная
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(315,5): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(325,5): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(226,9): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(278,27): warning C4101: iterator: неиспользованная локальная переменная
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(323,27): warning C4101: iterator: неиспользованная локальная переменная
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(323,9): warning C4101: number1: неиспользованная локальная переменная
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(323,18): warning C4101: number2: неиспользованная локальная переменная
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(400,5): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(410,5): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
 D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(119): warning C4715: translate_to_int: значение возвращается не при всех путях выполнения
   project_8_group.vcxproj -> D:\visual studio\repos\project_8_group\x64\Debug\project_8_group.exe
