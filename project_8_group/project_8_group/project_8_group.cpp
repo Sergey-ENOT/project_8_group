@@ -77,7 +77,7 @@ char getOperand() {
         std::cout << "Введите операцию: ";
         std::cin >> operand;
         std::cin.ignore(32767, '\n');
-        if (operand == '+' || operand == '/' || operand == '-' || operand == '*' || operand == '**' || operand == '!') {
+        if (operand == '+' || operand == '/' || operand == '-' || operand == '*' || operand == '**' || operand == '!' || operand == '%') {
             return operand;
         }
         std::cout << "Введите правильный знак операции" << std::endl;
@@ -317,6 +317,126 @@ void subtraction(vector<char>& num1, vector<char>& num2, vector<char>& result) {
     }
 }
 
+void multiplication(vector<char>& num1, vector<char>& num2, vector<char>& result) {
+    int flag = comparing_multiplication(num1, num2);     //обязательно переделать на умножение со смещением  
+    if (flag == 1) {                                     //т.к. 643 миллиона итераций это 22+ минуты ожидания(дальше я не стал ждать)
+        result.push_back('n');
+    }
+    else if (flag == 2) {
+        int counter_null = 0;
+        vector<char> pre_result;
+        vector<char> subtrahend = { 1 };
+        bool flagok = true;
+        do {
+            addition(num1, pre_result, result);
+            pre_result = result;
+            result.clear();
+            subtraction(num2, subtrahend, result);
+            num2 = result;
+            result.clear();
+            counter_null = 0;
+            for (int i = 0; i < num2.size(); i++) {
+                if (num2[i] == 'n' || num2[i] == '0') {
+                    counter_null += 1;
+                }
+            }
+            if (counter_null == num2.size()) {
+                result = pre_result;
+                flagok = false;
+            }
+        } while (flagok);
+    }
+}
+
+void integer_division(vector<char>& num1, vector<char>& num2, vector<char>& result){
+    int flag = comparing_division(num1, num2);
+    if (flag == 1) {                  //когда делимое равно 0
+        result.push_back(0);
+        return;
+    }
+    else if (flag == 2) {             //когда делитель равен 0
+        result.push_back('e');        //'e' = error
+        return;
+    }
+    else if (flag == 3) {
+        vector<char> summand = { 1 };
+        vector<char> counter_iteration = { 0 };
+        bool flagok = true;
+        do {
+            addition(counter_iteration, summand, result);     // блок подсчёта
+            counter_iteration = result;                      // итераций
+            result.clear();
+            subtraction(num1, num2, result);
+            num1 = result;
+            result.clear();
+            flag = comparing_division(num1, num2);       //отслеживание состояния векторов
+            if (flag == 1) {
+                result = counter_iteration;
+                flagok = false;
+            }
+            else if (flag == 4) {
+                result = counter_iteration;
+                flagok = false;
+            }
+            else if (flag == 5) {
+                addition(counter_iteration, summand, result);
+                flagok = false;
+            }
+        } while (flagok);
+        //вычитание в цикле while , пока уменьшаемое больше вычитаемого и увеличение вектора счётчика
+    }
+    else if (flag == 4) {
+        result.push_back(0);
+        return;
+    }
+    else if (flag == 5) {
+        result.push_back(1);
+        return;
+    }
+}
+
+void remainder_division(vector<char>& num1, vector<char>& num2, vector<char>& result) {
+    int flag = comparing_division(num1, num2);
+    if (flag == 1) {                  //когда делимое равно 0
+        result.push_back(0);
+        return;
+    }
+    else if (flag == 2) {             //когда делитель равен 0
+        result.push_back('e');        //'e' = error
+        return;
+    }
+    else if (flag == 3) {
+        bool flagok = true;
+        do {
+            subtraction(num1, num2, result);
+            num1 = result;
+            result.clear();
+            flag = comparing_division(num1, num2);       //отслеживание состояния векторов
+            if (flag == 1) {
+                result = { 0 };
+                flagok = false;
+            }
+            else if (flag == 4) {
+                result = num1;
+                flagok = false;
+            }
+            else if (flag == 5) {
+                result = { 0 };
+                flagok = false;
+            }
+        } while (flagok);
+        //вычитание в цикле while , пока не дойдём до num1 < num2
+    }
+    else if (flag == 4) {
+        result = num1;
+        return;
+    }
+    else if (flag == 5) {
+        result.push_back(0);
+        return;
+    }
+}
+
 void show_result(vector<char>& number);
 
 void calc(vector<char>& num1, char op, vector<char>& num2, vector<char>& result) {
@@ -328,69 +448,13 @@ void calc(vector<char>& num1, char op, vector<char>& num2, vector<char>& result)
         subtraction(num1, num2, result);
     }
     if (op == '*') {
-        int flag = comparing_multiplication(num1, num2);     //обязательно переделать на умножение со смещением  
-        if (flag == 1) {                                     //т.к. 643 миллиона итераций это 22+ минуты ожидания(дальше я не стал ждать)
-            result.push_back('n');
-        }
-        else if (flag == 2) {
-            int counter_null = 0;
-            vector<char> pre_result;
-            vector<char> subtrahend = { 1 };
-            bool flagok = true;
-            do {
-                addition(num1, pre_result, result);
-                pre_result = result;
-                result.clear();
-                subtraction(num2, subtrahend, result);
-                num2 = result;
-                result.clear();
-                counter_null = 0;
-                for (int i = 0; i < num2.size(); i++) {
-                    if (num2[i] == 'n' || num2[i] == '0') {
-                        counter_null += 1;
-                    }
-                }
-                if (counter_null == num2.size()) {
-                    result = pre_result;
-                    flagok = false;
-                }
-            } while (flagok);
-        }
+        multiplication(num1, num2, result);
     }
     if (op == '/') {
-        int flag = comparing_division(num1, num2);
-        if (flag == 1) {                  //когда делимое равно 0
-            result.push_back(0);
-            return;
-        }
-        else if (flag == 2) {             //когда делитель равен 0
-            result.push_back('e');        //'e' = error
-            return;
-        }
-        else if (flag == 3) {             //продолжение вычитания
-            //реализовать логику
-            vector<char> pre_result;
-            vector<char> subtrahend = { 1 };
-            vector<char> counter_iteration = num2;
-            bool flagok = true;
-            do {
-                subtraction(counter_iteration, subtrahend, result);     // блок уменьшения
-                counter_iteration = result;                             // оставшихся
-                result.clear();                                         // итераций
-                flag = comparing_division(num1, num2);       //отслеживание состояния векторов
-                subtraction(num1, num2, result);
-                
-            } while (flagok);
-            //вычитание в цикле while , пока уменьшаемое больше вычитаемого и увеличение вектора счётчика
-        }
-        else if (flag == 4) {
-            result.push_back(0);
-            return;
-        }
-        else if (flag == 5) {
-            result.push_back(1);
-            return;
-        }
+        integer_division(num1, num2, result);
+    }
+    if (op == '%') {
+        remainder_division(num1, num2, result);
     }
 }
 
@@ -454,7 +518,7 @@ void show_result(vector<char>& number) {
                 cout << 0;
                 break;
             case 'e':
-                cout << "На ноль делить нельзя";
+                cout << "error(на ноль делить нельзя)";
             }
             condition_of_null = 1;
         }
