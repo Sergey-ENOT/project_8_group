@@ -8,7 +8,7 @@
 
 using namespace std;
 
-vector<char> getNumber1(vector<char> &number) {
+vector<char> getNumber1(vector<char> &number, char& symbol) {
     //todo добавить считывание минуса и плюса в начале числа.
     //todo реализовать возможность введения отрицательных чисел.
     bool condition = true;
@@ -22,7 +22,6 @@ vector<char> getNumber1(vector<char> &number) {
             break;
         }
         for (int i = Number.length() - 1; i >= 0; i--) {
-            //if (i == 0 && Number[i] = '-')
             if (Number[i] == '0' || Number[i] == '1' || Number[i] == '2' || Number[i] == '3' ||
                 Number[i] == '4' || Number[i] == '5' || Number[i] == '6' || Number[i] == '7' ||
                 Number[i] == '8' || Number[i] == '9') {
@@ -32,9 +31,15 @@ vector<char> getNumber1(vector<char> &number) {
                 }
             }
             else {
-                cout << "Вы ввели неправильное число" << endl;               
-                number.clear();
-                break;
+                if (i == 0 && Number[i] == '-') {
+                    symbol = '-';
+                    condition = false;
+                }
+                else {
+                    cout << "Вы ввели неправильное число" << endl;
+                    number.clear();
+                    break;
+                }
             }
         }
     }
@@ -42,7 +47,7 @@ vector<char> getNumber1(vector<char> &number) {
     return number;
 }
 
-vector<char> getNumber2(vector<char>& number) {
+vector<char> getNumber2(vector<char>& number, char& symbol) {
     //todo добавить считывание минуса и плюса в начале числа.
     //todo реализовать возможность введения отрицательных чисел.
     bool condition = true;
@@ -61,9 +66,15 @@ vector<char> getNumber2(vector<char>& number) {
                 }
             }
             else {
-                cout << "Вы ввели неправильное число" << endl;
-                number.clear();
-                break;
+                if (i == 0 && Number[i] == '-') {
+                    symbol = '-';
+                    condition = false;
+                }
+                else {
+                    cout << "Вы ввели неправильное число" << endl;
+                    number.clear();
+                    break;
+                }
             }
         }
     }
@@ -71,13 +82,12 @@ vector<char> getNumber2(vector<char>& number) {
     return number;
 }
 
-char getOperand() {
-    char operand;
+char getOperand(char& operand) {
     while (true) {
         std::cout << "Введите операцию: ";
         std::cin >> operand;
         std::cin.ignore(32767, '\n');
-        if (operand == '+' || operand == '/' || operand == '-' || operand == '*' || operand == '**' || operand == '!' || operand == '%') {
+        if ((operand == '+' || operand == '/' || operand == '-' || operand == '*' || operand == '**' || operand == '!' || operand == '%')) {
             return operand;
         }
         std::cout << "Введите правильный знак операции" << std::endl;
@@ -528,16 +538,81 @@ void show_result(vector<char>& number) {
 int main()
 {
     setlocale(0, "");
+    cout << "Вы используете калькулятор больших чисел" << endl;
+    cout << "Вам доступны следующие операции: \n1.Сложение\n2.Вычитание\n3.Умножение\n4.Целочисленное деление\n5.Остаток от деления" << endl;
     while (true) {
+        char operand;
+        getOperand(operand);
         vector<char> num1a;
         vector<char> num2a;
         vector<char> result;
-        getNumber1(num1a);
+        char symbol_1 = '+';
+        char symbol_2 = '+';
+        getNumber1(num1a, symbol_1);
         if (num1a[0] == 'e') {
             exit(0);
         }
-        getNumber2(num2a);
-        calc(num1a, getOperand(), num2a, result);
+        getNumber2(num2a, symbol_2);
+        switch (operand) {
+        case '+':
+            if (symbol_1 == '+' && symbol_2 == '+') {
+                addition(num1a, num2a, result);
+            }
+            else if (symbol_1 == '+' && symbol_2 == '-') {
+                subtraction(num1a, num2a, result);
+            }
+            else if (symbol_1 == '-' && symbol_2 == '-') {
+                addition(num1a, num2a, result);
+                result.push_back('m');
+            }
+            else if (symbol_1 == '-' && symbol_2 == '+') {
+                int flag = comparing(num1a, num2a);
+                if (flag == 1) {
+                    subtraction(num1a, num2a, result);
+                    result.push_back('m');
+                }
+                else if (flag == 2) {
+                    subtraction(num2a, num1a, result);
+                }
+                else if (flag == 3) {
+                    result = { 0 };
+                }
+            }
+            break;
+        case '-':
+            if (symbol_1 == '+' && symbol_2 == '+') {
+                subtraction(num1a, num2a, result);
+            }
+            break;
+        case '*':
+            if ((symbol_1 == '-' && symbol_2 == '-') || (symbol_1 == '+' && symbol_2 == '+')) {
+                multiplication(num1a, num2a, result);
+            }
+            else {
+                multiplication(num1a, num2a, result);
+                result.push_back('m');
+            }
+            break;
+        case '/':
+            if ((symbol_1 == '-' && symbol_2 == '-') || (symbol_1 == '+' && symbol_2 == '+')) {
+                integer_division(num1a, num2a, result);
+            }
+            else {
+                integer_division(num1a, num2a, result);
+                result.push_back('m');
+            }
+            break;
+        case '%':
+            if ((symbol_1 == '-' && symbol_2 == '-') || (symbol_1 == '+' && symbol_2 == '+')) {
+                remainder_division(num1a, num2a, result);
+            }
+            else {
+                remainder_division(num1a, num2a, result);
+                result.push_back('m');
+            }
+            //код без break
+        }
+        //calc(num1a, operand, num2a, result);
         cout << "\nРезультат операции: ";
         show_result(result);
         cout << "\n";
