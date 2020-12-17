@@ -139,7 +139,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="addition.cpp" />
+    <ClCompile Include="comparing.cpp" />
+    <ClCompile Include="comparing_division.cpp" />
+    <ClCompile Include="comparing_multiplication.cpp" />
+    <ClCompile Include="GetNumber2.cpp" />
+    <ClCompile Include="GetNumber1.cpp" />
+    <ClCompile Include="GetOperand.cpp" />
+    <ClCompile Include="integer_division.cpp" />
+    <ClCompile Include="multiplication.cpp" />
     <ClCompile Include="project_8_group.cpp" />
+    <ClCompile Include="remainder_division.cpp" />
+    <ClCompile Include="show_result.cpp" />
+    <ClCompile Include="subtraction.cpp" />
+    <ClCompile Include="TTI.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="addition.h" />
+    <ClInclude Include="comparing.h" />
+    <ClInclude Include="comparing_division.h" />
+    <ClInclude Include="comparing_multiplication.h" />
+    <ClInclude Include="GetNumber1.h" />
+    <ClInclude Include="GetNumber2.h" />
+    <ClInclude Include="GetOperand.h" />
+    <ClInclude Include="integer_division.h" />
+    <ClInclude Include="multiplication.h" />
+    <ClInclude Include="remainder_division.h" />
+    <ClInclude Include="show_result.h" />
+    <ClInclude Include="subtraction.h" />
+    <ClInclude Include="TTI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
