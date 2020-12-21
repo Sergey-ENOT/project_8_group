@@ -31,7 +31,7 @@ int comparing_multiplication(vector<char>& num1, vector<char>& num2) {
         num1 = changer;
         flag = 2;
     }
-    else if (num1.size() == num2.size()) {
+    else if (num1.size() == num2.size()) {            //продолжить сравнение тут
         flag = 2;
     }
     return flag;

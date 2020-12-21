@@ -1,0 +1,3 @@
+﻿  addition.cpp
+D:\visual studio\repos\project_8_group\project_8_group\addition.cpp(12,27): warning C4018: <: несоответствие типов со знаком и без знака
+  project_8_group.vcxproj -> D:\visual studio\repos\project_8_group\Release\project_8_group.exe

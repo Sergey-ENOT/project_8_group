@@ -23,9 +23,15 @@ vector<char> getNumber2(vector<char>& number, char& symbol) {
                 }
             }
             else {
-                if (i == 0 && Number[i] == '-') {
-                    symbol = '-';
-                    condition = false;
+                if (i == 0) {
+                    if (Number[i] == '-') {
+                        symbol = '-';
+                        condition = false;
+                    }
+                    else if (Number[i] == '+') {
+                        symbol = '+';
+                        condition = false;
+                    }
                 }
                 else {
                     cout << "Вы ввели неправильное число" << endl;

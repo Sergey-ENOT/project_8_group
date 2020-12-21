@@ -31,4 +31,7 @@ int translate_to_int(char a) {
     if (a == '9') {
         return 9;
     }
+    if (a == 'n') {
+        return 0;
+    }
 }

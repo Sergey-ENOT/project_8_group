@@ -1,0 +1,32 @@
+﻿  addition.cpp
+D:\visual studio\repos\project_8_group\project_8_group\addition.cpp(10,27): warning C4018: <: несоответствие типов со знаком и без знака
+  checker_number.cpp
+  check_operand.cpp
+  comparing.cpp
+D:\visual studio\repos\project_8_group\project_8_group\comparing.cpp(9,9): warning C4101: counter_equality: неиспользованная локальная переменная
+  comparing_division.cpp
+D:\visual studio\repos\project_8_group\project_8_group\comparing_division.cpp(9,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\visual studio\repos\project_8_group\project_8_group\comparing_division.cpp(15,23): warning C4018: <: несоответствие типов со знаком и без знака
+  comparing_multiplication.cpp
+D:\visual studio\repos\project_8_group\project_8_group\comparing_multiplication.cpp(9,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\visual studio\repos\project_8_group\project_8_group\comparing_multiplication.cpp(15,23): warning C4018: <: несоответствие типов со знаком и без знака
+  condition_symbols.cpp
+  condition_symbols_console.cpp
+  GetNumber2.cpp
+  GetNumber1.cpp
+  GetOperand.cpp
+  integer_division.cpp
+  multiplication.cpp
+D:\visual studio\repos\project_8_group\project_8_group\multiplication.cpp(27,31): warning C4018: <: несоответствие типов со знаком и без знака
+  project_8_group.cpp
+D:\visual studio\repos\project_8_group\project_8_group\project_8_group.cpp(27,1): warning C4326: возвращаемый тип "main" должен быть "int", а не "void"
+  remainder_division.cpp
+  show_result.cpp
+  subtraction.cpp
+D:\visual studio\repos\project_8_group\project_8_group\subtraction.cpp(13,27): warning C4018: <: несоответствие типов со знаком и без знака
+D:\visual studio\repos\project_8_group\project_8_group\subtraction.cpp(29,27): warning C4018: <: несоответствие типов со знаком и без знака
+D:\visual studio\repos\project_8_group\project_8_group\subtraction.cpp(8,27): warning C4101: iterator: неиспользованная локальная переменная
+  TTI.cpp
+  Создание кода...
+D:\visual studio\repos\project_8_group\project_8_group\TTI.cpp(34): warning C4715: translate_to_int: значение возвращается не при всех путях выполнения
+  project_8_group.vcxproj -> D:\visual studio\repos\project_8_group\Debug\project_8_group.exe

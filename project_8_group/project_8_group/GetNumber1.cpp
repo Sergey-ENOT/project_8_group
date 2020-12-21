@@ -13,11 +13,6 @@ vector<char> getNumber1(vector<char>& number, char& symbol) {
         std::cout << "Введите первое число: ";
         string Number;
         getline(cin, Number);
-        if (Number == "exit") {
-            number.push_back('e');
-            condition = false;
-            break;
-        }
         for (int i = Number.length() - 1; i >= 0; i--) {
             if (Number[i] == '0' || Number[i] == '1' || Number[i] == '2' || Number[i] == '3' ||
                 Number[i] == '4' || Number[i] == '5' || Number[i] == '6' || Number[i] == '7' ||
@@ -28,9 +23,15 @@ vector<char> getNumber1(vector<char>& number, char& symbol) {
                 }
             }
             else {
-                if (i == 0 && Number[i] == '-') {
-                    symbol = '-';
-                    condition = false;
+                if (i == 0) {
+                    if (Number[i] == '-') {
+                        symbol = '-';
+                        condition = false;
+                    }
+                    else if (Number[i] == '+') {
+                        symbol = '+';
+                        condition = false;
+                    }
                 }
                 else {
                     cout << "Вы ввели неправильное число" << endl;

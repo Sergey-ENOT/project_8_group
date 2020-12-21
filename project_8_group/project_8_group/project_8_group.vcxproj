@@ -36,7 +36,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -140,9 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="addition.cpp" />
+    <ClCompile Include="checker_number.cpp" />
+    <ClCompile Include="check_operand.cpp" />
     <ClCompile Include="comparing.cpp" />
     <ClCompile Include="comparing_division.cpp" />
     <ClCompile Include="comparing_multiplication.cpp" />
+    <ClCompile Include="condition_symbols.cpp" />
+    <ClCompile Include="condition_symbols_console.cpp" />
     <ClCompile Include="GetNumber2.cpp" />
     <ClCompile Include="GetNumber1.cpp" />
     <ClCompile Include="GetOperand.cpp" />
@@ -156,9 +160,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="addition.h" />
+    <ClInclude Include="checker_number.h" />
+    <ClInclude Include="check_operand.h" />
     <ClInclude Include="comparing.h" />
     <ClInclude Include="comparing_division.h" />
     <ClInclude Include="comparing_multiplication.h" />
+    <ClInclude Include="condition_symbols.h" />
+    <ClInclude Include="condition_symbols_console.h" />
     <ClInclude Include="GetNumber1.h" />
     <ClInclude Include="GetNumber2.h" />
     <ClInclude Include="GetOperand.h" />

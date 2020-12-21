@@ -9,13 +9,13 @@ int comparing(vector<char>& num1, vector<char>& num2) {
     int counter_equality;
     if (length_num1 > length_num2) {                            //если первое больше второго, то вставка во второй
         for (int i = 0; i < length_num1 - length_num2; i++) {   //вектор нулей до выравнивания
-            num2.push_back(0);
+            num2.push_back('n');
             flag = 1;
         }
     }
     else if (length_num1 < length_num2) {                     //если второй больше, то вставка в первый вектор
         for (int i = 0; i < length_num2 - length_num1; i++) { //нулей до выравнивания                   
-            num1.push_back(0);
+            num1.push_back('n');
             flag = 2;
         }
     }

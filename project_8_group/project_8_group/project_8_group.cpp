@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 #include "GetOperand.h"
 #include "GetNumber1.h"
 #include "GetNumber2.h"
@@ -13,112 +14,69 @@
 #include "integer_division.h"
 #include "remainder_division.h"
 #include "show_result.h"
+#include "condition_symbols.h"
+#include "TTI.h"
+#include "condition_symbols_console.h"
+#include "checker_number.h"
+#include "check_operand.h"
 //#include <cmath> (пока не нужен)
 
 using namespace std;
 
-int main()
+void main(int argc, char* argv[])        //сделать считывание по каждому аргументу(3 получается на ввод) 
 {
     setlocale(0, "");
-    cout << "Вы используете калькулятор больших чисел" << endl;
-    cout << "Вам доступны следующие операции: \n1.Сложение[+]\n2.Вычитание[-]\n3.Умножение[*]\n4.Целочисленное деление[/]\n5.Остаток от деления[%]" << endl;
-    while (true) {
-        vector<char> num1a;
-        vector<char> num2a;
-        vector<char> result;
-        char operand;
-        char symbol_1 = '+';
-        char symbol_2 = '+';
-        cout << "\n";
-        getNumber1(num1a, symbol_1);
-        getOperand(operand);
-        cout << "\n";
-        getNumber2(num2a, symbol_2);
-        switch (operand) {
-        case '+':
-            if (symbol_1 == '+' && symbol_2 == '+') {
-                addition(num1a, num2a, result);
-            }
-            else if (symbol_1 == '+' && symbol_2 == '-') {
-                subtraction(num1a, num2a, result);
-            }
-            else if (symbol_1 == '-' && symbol_2 == '-') {
-                addition(num1a, num2a, result);
-                result.push_back('m');
-            }
-            else if (symbol_1 == '-' && symbol_2 == '+') {
-                int flag = comparing(num1a, num2a);
-                if (flag == 1) {
-                    subtraction(num1a, num2a, result);
-                    result.push_back('m');
-                }
-                else if (flag == 2) {
-                    subtraction(num2a, num1a, result);
-                }
-                else if (flag == 3) {
-                    result = { 0 };
-                }
-            }
-            break;
-        case '-':
-            if (symbol_1 == '+' && symbol_2 == '+') {
-                subtraction(num1a, num2a, result);
-            }
-            else if (symbol_1 == '-' && symbol_2 == '-') {
-                int flag = comparing(num1a, num2a);
-                if (flag == 1) {
-                    subtraction(num1a, num2a, result);
-                    result.push_back('m');
-                }
-                else if (flag == 2) {
-                    subtraction(num2a, num1a, result);
-                }
-                else if (flag == 3) {
-                    result = { 0 };
-                }
-            }
-            else if (symbol_1 == '+' && symbol_2 == '-') {
-                addition(num1a, num2a, result);
-            }
-            else if (symbol_1 == '-' && symbol_2 == '+') {
-                addition(num1a, num2a, result);
-                result.push_back('m');
-            }
-            break;
-        case '*':
-            if ((symbol_1 == '-' && symbol_2 == '-') || (symbol_1 == '+' && symbol_2 == '+')) {
-                multiplication(num1a, num2a, result);
-            }
-            else {
-                multiplication(num1a, num2a, result);
-                result.push_back('m');
-            }
-            break;
-        case '/':
-            if ((symbol_1 == '-' && symbol_2 == '-') || (symbol_1 == '+' && symbol_2 == '+')) {
-                integer_division(num1a, num2a, result);
-            }
-            else {
-                integer_division(num1a, num2a, result);
-                result.push_back('m');
-            }
-            break;
-        case '%':
-            if ((symbol_1 == '-' && symbol_2 == '-') || (symbol_1 == '+' && symbol_2 == '+')) {
-                remainder_division(num1a, num2a, result);
-            }
-            else {
-                remainder_division(num1a, num2a, result);
-                result.push_back('m');
-            }
+    if (argc > 1) {
+        if (argc == 3) {
+            cout << "SyntaxError: invalid syntax";
+            exit(0);
         }
-        cout << "\nРезультат операции: ";
-        show_result(result);
-        cout << "\n";
-        cout << "\n";
-        cout << "\n";
+        else if (argc == 2) {
+            cout << argv[1];
+        }
+        else if (argc >= 5) {
+            cout << "SyntaxError: invalid syntax";
+        }
+        else {
+            char operand;
+            char symbol_1 = '+';
+            char symbol_2 = '+';
+            string num1a_str;
+            string num2a_str;
+            vector<char> num1a;
+            vector<char> num2a;
+            vector<char> result;
+            for (int i = 1; i < argc; i++) {
+                if (i == 1) {
+                    num1a_str = argv[i];
+                }
+                else if (i == 2) {
+                    operand = *(argv[i]);
+                }
+                else if (i == 3) {
+                    num2a_str = argv[i];
+                }
+            }
+            checker_number(num1a_str, symbol_1, num1a);
+            check_operand(operand);
+            checker_number(num2a_str, symbol_2, num2a);
+            condition_symbols_console(num1a, num2a, result, symbol_1, symbol_2, operand);
+            exit(0);
+        }
     }
-    return 0;
+    else {
+        cout << "Вы используете калькулятор больших чисел" << endl;
+        cout << "Вам доступны следующие операции: \n1.Сложение[+]\n2.Вычитание[-]\n3.Умножение[*]\n4.Целочисленное деление[/]\n5.Остаток от деления[%]" << endl;
+        while (true) {
+            vector<char> num1a;
+            vector<char> num2a;
+            vector<char> result;
+            condition_symbols(num1a, num2a, result);
+            cout << "\n";
+            cout << "\n";
+            cout << "\n";
+        }
+    }
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

@@ -60,7 +60,7 @@ void show_result(vector<char>& number) {
                 cout << 9;
             }
             if (number[i] == 'e') {
-                cout << "error(на ноль делить нельзя)";
+                cout << "ZeroDivisionError: division by zero";
             }
             condition_of_null = 1;
         }
