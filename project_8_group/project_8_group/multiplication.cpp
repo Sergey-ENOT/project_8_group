@@ -20,20 +20,11 @@ void multiplication(vector<char>& num1, vector<char>& num2, vector<char>& result
         do {
             addition(num1, pre_result, result);
             pre_result = result;
-            cout << "pre_result: ";
-            show_result(pre_result);
-            cout << "\n";
             result.clear();
             subtraction(num2, subtrahend, result);
-            cout << "result: ";
-            show_result(result);
-            cout << "\n";
             num2 = result;
             result.clear();
             counter_null = 0;
-            cout << "num2: ";
-            show_result(num2);
-            cout << "\n";
             for (int i = 0; i < num2.size(); i++) {
                 if (num2[i] == 'n' || num2[i] == '0') {
                     counter_null += 1;

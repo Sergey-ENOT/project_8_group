@@ -12,11 +12,8 @@ void addition(vector<char>& num1, vector<char>& num2, vector<char>& result) {
         for (int i = 0; i < num1.size(); i++) {
             number1 = translate_to_int(num1[i]);
             number2 = translate_to_int(num2[i]);
-            cout << "number1: " << number1 << endl;
-            cout << "number2: " << number2 << endl;
             if (number1 + number2 + iterator < 10) {              //если сумма меньше 10, то просто пуш в result числа
                 int summ = number1 + number2 + iterator;
-                cout << "summ...: " << summ << endl;
                 iterator = 0;
                 result.push_back(summ);
             }
@@ -26,8 +23,6 @@ void addition(vector<char>& num1, vector<char>& num2, vector<char>& result) {
                     iterator = 1;                                 // и запись увеличения следующего разряда в iterator
                     result.push_back(summ - 10);
                     result.push_back(iterator);
-                    cout << "summ/: " << summ << endl;
-                    cout << "iterator: " << iterator << endl;
                 }
                 else {
                     int summ = number1 + number2 + iterator;

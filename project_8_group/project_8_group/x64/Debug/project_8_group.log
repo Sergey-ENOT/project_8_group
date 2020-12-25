@@ -1,6 +1,2 @@
 ﻿  addition.cpp
-  multiplication.cpp
-  subtraction.cpp
-D:\visual studio\repos\project_8_group\project_8_group\subtraction.cpp(8,27): warning C4101: iterator: неиспользованная локальная переменная
-  Создание кода...
   project_8_group.vcxproj -> D:\visual studio\repos\project_8_group\x64\Debug\project_8_group.exe
